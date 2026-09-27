@@ -231,7 +231,7 @@ LOGGING = {
 # Cache configuration (Redis with LocMemCache fallback)
 redis_url = os.environ.get('REDIS_URL')
 if not DEBUG and not redis_url:
-    raise ImproperlyConfigured("REDIS_URL environment variable is required in production (DEBUG=False).")
+    print("WARNING: REDIS_URL environment variable is not set. Falling back to LocMemCache.")
 
 if redis_url:
     try:
