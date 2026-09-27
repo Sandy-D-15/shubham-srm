@@ -34,5 +34,8 @@ USER srms
 # Expose port
 EXPOSE 8000
 
+# Collect static files during build
+RUN python manage.py collectstatic --no-input
+
 # Run gunicorn
-CMD ["gunicorn", "StudentResultManagement.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn StudentResultManagement.wsgi:application --bind 0.0.0.0:8000 --workers 3"]
